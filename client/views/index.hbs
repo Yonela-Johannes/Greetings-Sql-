@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<title>Greetings</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel=" preconnect"
+    href="https://fonts.google.com/share?selection.family=Abel%7CBarlow%20Semi%20Condensed:wght@300%7CRoboto:wght@100%7CSmooch%20Sans:wght@200" />
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Greet Counter</h1>
+            <div>
+                <a href="/users">
+                    <h3>{{allUsers}}</h3>
+                </a>
+            </div>
+        </header>
+        <div class="head">
+            <img src="./greet.jpg" alt="" />
+        </div>
+        <fieldset>
+            <legend>Greetings</legend>
+            </h1>
+            <div class="greeting-container">
+                <div class="main-container">
+                    <form action="/" method="POST">
+                        <div class="input-container">
+                            <label class="name-label" for="name">Name:</label>
+                            <input class='name' type="text" name='name' placeholder="enter your name" />
+                            <label class="counter">{{count}}</label>
+                        </div>
+                        <label class="error">{{nameError}}</label><br />
+                        <label class="dup-error hide"></label><br />
+                        <div class="bottom-container">
+                            <span>Select language</span><br />
+
+                            <input name='languages' type="radio" class='language' value="Hello" />
+                            <label for="english">English</label><br />
+
+                            <input name="languages" type="radio" class='language' value="Hallo" />
+                            <label for="afrikaans">Afrikaans</label><br />
+
+                            <input name="languages" type="radio" class='language' value="Molo" />
+                            <label for="xhosa">isiXhosa</label><br />
+
+                            <input name="languages" type="radio" class='language' value="Sawubona" />
+                            <label for="Zulu">isiZulu</label><br />
+
+                            <input name="languages" type="radio" class='language' value="Lumela" /></label>
+                            <label for="Sesotho">Sesotho</label></br>
+
+                            <label class="selection-error">{{languageError}}</label>
+                        </div>
+                        <div class="buttons">
+                            <button type="submit" name="language" class="greet-me">Greet Me</button>
+                            <button class="greet-me reset">Reset Me</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <label class="greet">{{language}} {{name}} </label>
+        </fieldset>
+
+    </div>
+</body>
+
+</html>

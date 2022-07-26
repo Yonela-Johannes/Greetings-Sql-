@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Greetings</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel=" preconnect"
+        href="https://fonts.google.com/share?selection.family=Abel%7CBarlow%20Semi%20Condensed:wght@300%7CRoboto:wght@100%7CSmooch%20Sans:wght@200" />
+</head>
+
+<body>
+    <header>
+        <div>
+            <a class="back" href="/">
+                {{back}}
+            </a>
+        </div>
+        <h3>{{name}}</h3>
+    </header>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Names</th>
+                {{#each allUsers}}
+            <tr>
+                <form action="/users/{{this}}" method="POST">
+                    <td type="submit" class="username"><a href='/user/{{this}}'><p class="name">{{this}}</p></a></td>
+                </form>
+            </tr>
+            {{/each}}
+        </table>
+        {{noDataError}}
+    </div>
+
+</body>
+
+</html>

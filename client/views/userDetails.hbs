@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Greetings</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body>
+    <header>
+        <div class="back-container">
+            <a class="back" href="/users">
+                {{back}}
+            </a>
+            <a class="back" href="/">
+                {{home}}
+            </a>
+        </div>
+    </header>
+    <div class="row">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Time</th>
+                <th>Language</th>
+                <th>Greeting</th>
+            </tr>
+            {{#each userdetails}}
+            <tr>
+                <td>
+                    <p class="name">{{name}}</p>
+                </td>
+                <td>{{time}}</td>
+                <td>{{language}}</td>
+                <td>{{greet}}</td>
+            </tr>
+            {{/each}}
+        </table>
+        <div class="total">
+            <p class='totalName'>Total: </p>
+            <p class="totalCounter">{{counter}}</p>
+        </div>
+        {{noDataError}}
+    </div>
+
+</body>
+
+</html>
