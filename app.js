@@ -7,7 +7,7 @@ let nameInput = ''
 let language = ''
 let userLanguage = ""
 let userData;
-let count = 0
+let count = 1
 
 export function Greet() {
     const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
@@ -60,12 +60,13 @@ export function Greet() {
     const mapper = () => {
         const username = users.find(user => user.name === nameInput)
         const values = Object.values(username ? username : [])
-        if (values[0] === nameInput) {
+        if (values[0] === userDetailsName) {
             const updateUser = {
                 name: nameInput,
                 language: userLanguage,
                 greet: language,
                 time: moment().fromNow(),
+                counter: 1
             }
             users = [...users, updateUser]
         } else if (nameInput && language && userLanguage) {
@@ -74,6 +75,7 @@ export function Greet() {
                 language: userLanguage,
                 greet: language,
                 time: moment(new Date()).fromNow(),
+                counter: 1
             }
             users = [...users, user]
         }

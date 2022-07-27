@@ -9,21 +9,21 @@ const app = express()
 
 const greet = Greet()
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'sampledb',
-    port: PORT
-})
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456',
+//     database: 'sampledb',
+//     port: PORT
+// })
 
-db.connect((err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log('MySql Connected...')
-    }
-})
+// db.connect((err) => {
+//     if (err) {
+//         console.log(err)
+//     } else {
+//         console.log('MySql Connected...')
+//     }
+// })
 
 app.set('view engine', 'hbs')
 
@@ -40,13 +40,13 @@ app.use(cors())
 app.use(bodyParser.json())
 // Home 
 app.get('/', (req, res) => {
-    db.query("SELECT * FOM mySampleTable", (err, rows, files) => {
-        if (err) {
-            console.log(err)
-        } else {
-            console.log('success')
-        }
-    })
+    // db.query("SELECT * FOM mySampleTable", (err, rows, files) => {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         console.log('success')
+    //     }
+    // })
     res.render('index', {
         allUsers: greet.getUsers(),
     }
