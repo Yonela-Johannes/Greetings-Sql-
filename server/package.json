@@ -5,24 +5,22 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "ng build",
-    "heroku-postbuild": "ng build --prod" 
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
+    "mysql": "^2.18.1",
     "nodejs": "^0.0.0",
     "nodemon": "^2.0.19"
   },
   "devDependencies": {
-    "moment": "^2.29.4"
-  },
-    "engines": {
-    "node": "17.60.1",
-    "yarn": "1.x"
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.19"
   }
 }

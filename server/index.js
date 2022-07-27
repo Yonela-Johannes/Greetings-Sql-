@@ -1,11 +1,29 @@
 import express from 'express'
+import mysql from 'mysql'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import handlebars from 'express-handlebars'
 import { Greet } from './app.js'
 const PORT = process.env.PORT || 8000
 const app = express()
 
 const greet = Greet()
+
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'sampledb',
+    port: PORT
+})
+
+db.connect((err) => {
+    if (err) {
+        console.log(err)
+    } else {
+        console.log('MySql Connected...')
+    }
+})
 
 app.set('view engine', 'hbs')
 
@@ -16,10 +34,19 @@ app.engine('hbs', handlebars.engine({
 }))
 app.use(express.static('../client/public'))
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
+
 
 app.use(bodyParser.json())
 // Home 
 app.get('/', (req, res) => {
+    db.query("SELECT * FOM mySampleTable", (err, rows, files) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log('success')
+        }
+    })
     res.render('../../client/views/', {
         allUsers: greet.getUsers(),
     }
