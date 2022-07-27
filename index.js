@@ -28,11 +28,11 @@ db.connect((err) => {
 app.set('view engine', 'hbs')
 
 app.engine('hbs', handlebars.engine({
-    layoutsDir: `../client/views/layouts`,
+    layoutsDir: `./views/layouts`,
     extname: 'hbs',
     defaultLayout: 'main',
 }))
-app.use(express.static('../client/public'))
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
             console.log('success')
         }
     })
-    res.render('../../client/views/', {
+    res.render('index', {
         allUsers: greet.getUsers(),
     }
 
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/', (req, res) => {
-    res.render('../../client/views/index', {
+    res.render('index', {
         setname: greet.setName(req.body.name),
         setLanguage: greet.setLanguage(req.body.languages),
         name: greet.getName(),
@@ -72,7 +72,7 @@ app.post('/', (req, res) => {
 )
 
 app.get('/user/:id', (req, res) => {
-    res.render('../../client/views/userDetails',
+    res.render('userDetails',
         {
             setUser: greet.setUserDetails(req.params.id),
             userdetails: greet.getUserDetails(),
@@ -87,7 +87,7 @@ app.get('/user/:id', (req, res) => {
 })
 
 app.get('/users', (req, res) => {
-    res.render('../../client/views/users', {
+    res.render('users', {
         back: "< back",
         allUsers: greet.getUsers(),
     })
