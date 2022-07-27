@@ -54,10 +54,12 @@
 
                             <label class="selection-error">{{languageError}}</label>
                         </div>
-                        <div class="buttons">
-                            <button type="submit" name="language" class="greet-me">Greet Me</button>
-                            <button class="greet-me reset">Reset Me</button>
-                        </div>
+                        <form action="/clear" method="post">
+                            <div class="buttons">
+                                <button type="submit" name="language" class="greet-me">Greet Me</button>
+                                <button type="submit" class="greet-me reset">Reset Me</button>
+                            </div>
+                        </form>
                     </form>
                 </div>
             </div>
