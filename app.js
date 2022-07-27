@@ -8,6 +8,7 @@ let language = ''
 let userLanguage = ""
 let userData;
 let count = 1
+let total = []
 
 export function Greet() {
     const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
@@ -83,9 +84,10 @@ export function Greet() {
 
     const getCounter = () => {
         count = users.filter(user => user.name === nameInput)
-        console.log(count)
         return count ? count.length : 0
     }
+
+
     return {
         setName,
         getName,
@@ -99,7 +101,7 @@ export function Greet() {
         getUserDetails,
         getCounter,
         setSelectedLanguage,
-        getSelectedLanguage
+        getSelectedLanguage,
     }
 
 }

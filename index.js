@@ -81,7 +81,7 @@ app.get('/user/:id', (req, res) => {
             name: greet.getName(),
             userLanguage: greet.getSelectedLanguage(),
             back: "< back",
-            home: "home"
+            home: "home",
         }
     )
 })
