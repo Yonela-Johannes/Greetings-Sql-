@@ -9,6 +9,4 @@ if (nameInput.value == '') {
         nameError.classList.add('hide')
         selectionError.classList.add('hide')
     }, 3000)
-
-
 }
