@@ -102,6 +102,24 @@ legend{
 .bottom-container {
     margin: 10px 0;
 }
+.lang-title{
+    font-size: 14px;
+    color:rgba(40, 40, 40, 0.765);
+}
+.radio-selectors{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.radio-items{
+    margin:10px 15px;
+
+}
+
+.language{
+}
 .buttons{
     display: flex;
     justify-content: space-around;
@@ -168,6 +186,18 @@ button:hover{
     display: none;
 }
 
+.view-users{
+    margin-top: 20px;
+    color: gray;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .1s ease;
+}
+
+.view-users:hover{
+    color: black;
+}
 .selection-error {
     /* position: absolute; */
     color: red;
@@ -215,11 +245,14 @@ table, th, td {
     margin: 10px 0;
     display: flex;
 }
-.totalName{
+.total-name{
     color: rgb(43, 43, 43);
 }
 
-.totalCounter{
+.user-title{
+    margin: 10px;
+}
+.total-counter{
     font-weight: bold;
     margin: 0 10px;
 }
@@ -251,9 +284,6 @@ a.back:hover{
     width: 400px;
 }
 
-/* .tableRow{
-    display
-} */
 
 .name{
     text-transform: capitalize;

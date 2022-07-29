@@ -38,17 +38,11 @@ app.use(cors())
 
 
 app.use(bodyParser.json())
-// Home 
+
 app.get('/', (req, res) => {
-    // db.query("SELECT * FOM mySampleTable", (err, rows, files) => {
-    //     if (err) {
-    //         console.log(err)
-    //     } else {
-    //         console.log('success')
-    //     }
-    // })
     res.render('index', {
-        allUsers: greet.getUsers(),
+        list_users: "View Users...",
+        counter: greet.getCounter(),
     }
 
     )
@@ -65,9 +59,12 @@ app.post('/', (req, res) => {
         nameError: greet.getNameError(),
         mapper: greet.mapper(),
         count: greet.getCounter(),
-        allUsers: "Users",
+        list_users: `View ${greet.getName()} and more users...`,
+        setCounter: greet.getTotalCount()
     }
     )
+    console.log(greet.getTotalCount())
+
 }
 )
 
@@ -81,6 +78,7 @@ app.get('/user/:id', (req, res) => {
             name: greet.getName(),
             userLanguage: greet.getSelectedLanguage(),
             back: "< back",
+            total_counter: greet.getTotalCount(),
             home: "home",
         }
     )

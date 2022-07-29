@@ -1,5 +1,6 @@
 import moment from 'moment'
 const username = []
+let usernames = []
 let userDetailsName = ''
 let users = []
 let storedUsernames = []
@@ -8,7 +9,7 @@ let language = ''
 let userLanguage = ""
 let userData;
 let count = 1
-let total = []
+let count_user = []
 
 export function Greet() {
     const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
@@ -67,7 +68,7 @@ export function Greet() {
                 language: userLanguage,
                 greet: language,
                 time: moment().fromNow(),
-                counter: 1
+                counter: 1,
             }
             users = [...users, updateUser]
         } else if (nameInput && language && userLanguage) {
@@ -76,17 +77,25 @@ export function Greet() {
                 language: userLanguage,
                 greet: language,
                 time: moment(new Date()).fromNow(),
-                counter: 1
+                counter: 1,
             }
             users = [...users, user]
         }
     }
 
     const getCounter = () => {
-        count = users.filter(user => user.name === nameInput)
-        return count ? count.length : 0
+        usernames = users.filter(user => user.name === nameInput)
+        return username ? usernames.length : 0
     }
 
+    const getTotalCount = () => {
+        count_user = usernames.filter(username => username.name === userDetailsName)
+        console.log('User Count ', count_user)
+        // (userDetailsName){
+
+        // }
+        return count_user.length
+    }
 
     return {
         setName,
@@ -102,6 +111,7 @@ export function Greet() {
         getCounter,
         setSelectedLanguage,
         getSelectedLanguage,
+        getTotalCount,
     }
 
 }

@@ -12,11 +12,6 @@
     <div class="container">
         <header>
             <h1>Greet Counter</h1>
-            <div>
-                <a href="/users">
-                    <h3>{{allUsers}}</h3>
-                </a>
-            </div>
         </header>
         <div class="head">
             <img src="./greet.jpg" alt="" />
@@ -35,24 +30,24 @@
                         <label class="error">{{nameError}}</label><br />
                         <label class="dup-error hide"></label><br />
                         <div class="bottom-container">
-                            <span>Select language</span><br />
+                            <span class="lang-title">Select language:</span><br />
+                            <div class="radio-selectors">
+                                <div class="radio-items">
+                                    <input name='languages' type="radio" class='language' value="Hello" />
+                                    <label for="english">English</label><br />
+                                </div>
 
-                            <input name='languages' type="radio" class='language' value="Hello" />
-                            <label for="english">English</label><br />
+                                <div class="radio-items">
+                                    <input name="languages" type="radio" class='language' value="Hallo" />
+                                    <label for="afrikaans">Afrikaans</label><br />
+                                </div>
 
-                            <input name="languages" type="radio" class='language' value="Hallo" />
-                            <label for="afrikaans">Afrikaans</label><br />
-
-                            <input name="languages" type="radio" class='language' value="Molo" />
-                            <label for="xhosa">isiXhosa</label><br />
-
-                            <input name="languages" type="radio" class='language' value="Sawubona" />
-                            <label for="Zulu">isiZulu</label><br />
-
-                            <input name="languages" type="radio" class='language' value="Lumela" /></label>
-                            <label for="Sesotho">Sesotho</label></br>
-
-                            <label class="selection-error">{{languageError}}</label>
+                                <div class="radio-items">
+                                    <input name="languages" type="radio" class='language' value="Molo" />
+                                    <label for="xhosa">isiXhosa</label><br />
+                                </div>
+                                <label class="selection-error">{{languageError}}</label>
+                            </div>
                         </div>
                         <form action="/clear" method="post">
                             <div class="buttons">
@@ -63,11 +58,16 @@
                     </form>
                 </div>
             </div>
+            <a href="/users">
+                <p class="view-users">
+                    {{list_users}}
+                </p>
+                <p class="totalCounter"></p>
+            </a>
         </fieldset>
         <fieldset>
             <label class="greet">{{language}} {{name}} </label>
         </fieldset>
-
     </div>
 </body>
 

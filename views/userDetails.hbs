@@ -19,6 +19,7 @@
             </a>
         </div>
     </header>
+    <p class="user-title">Hey {{name}} you have been greeted {{total_counter}} times.</p>
     <div class="row">
         <table>
             <tr>
@@ -40,8 +41,11 @@
             </tr>
             {{/each}}
         </table>
-
         {{noDataError}}
+        <div class="total">
+            <p class="total-name">Total: </p>
+            <p class="'total-name">{{total_counter}}</p>
+        </div>
     </div>
 
 </body>
