@@ -21,13 +21,16 @@
     </header>
     <div class="row">
         <table class="table">
-            <tr>
-                <th>Names</th>
-                {{#each allUsers}}
-            <tr>
-                <form action="/users/{{this}}" method="POST">
-                    <td type="submit" class="username"><a href='/user/{{this}}'><p class="name">{{this}}</p></a></td>
-                </form>
+            <form action="/users/{{this}}" method="POST">
+                <tr>
+                    <th>{{user_names}}</th>
+                <tr>
+                    {{#each allUsers}}
+                    <td type="submit" class="username"><a href='/user/{{this}}'>
+                            <p class="name">{{this}}</p>
+                        </a>
+                    </td>
+            </form>
             </tr>
             {{/each}}
         </table>

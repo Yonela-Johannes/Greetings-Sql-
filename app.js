@@ -14,7 +14,7 @@ let count_user = []
 export function Greet() {
     const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
     const setLanguage = (lang) => language = lang
-    const getLanguage = () => nameInput ? language : language = ""
+    const getLanguage = () => nameInput && language ? language : language = ""
     const getName = () => language ? nameInput.slice(0, 1).toUpperCase() + nameInput.slice(1).toLowerCase() : ''
     const getNameError = () => !nameInput ? "Please enter your name!" : ''
     const getLanguageError = () => !language ? "Please select language!" : ''
@@ -59,10 +59,11 @@ export function Greet() {
         return userData && userData
     }
     const getSelectedLanguage = () => userLanguage
+
     const mapper = () => {
         const username = users.find(user => user.name === nameInput)
         const values = Object.values(username ? username : [])
-        if (values[0] === userDetailsName) {
+        if (values[0] === userDetailsName, nameInput && language && userLanguage) {
             const updateUser = {
                 name: nameInput,
                 language: userLanguage,
@@ -84,17 +85,19 @@ export function Greet() {
     }
 
     const getCounter = () => {
-        usernames = users.filter(user => user.name === nameInput)
-        return username ? usernames.length : 0
+        if (nameInput) {
+            usernames = users.filter(user => user.name === nameInput)
+            return username ? usernames.length : 0
+        }
     }
 
     const getTotalCount = () => {
-        count_user = usernames.filter(username => username.name === userDetailsName)
-        console.log('User Count ', count_user)
-        // (userDetailsName){
-
-        // }
-        return count_user.length
+        count_user = users.filter(username => username.name === userDetailsName)
+        if (count_user.length === 1) {
+            return count_user.length + " time."
+        } else {
+            return count_user.length + " times."
+        }
     }
 
     return {

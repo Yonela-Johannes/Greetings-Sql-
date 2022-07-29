@@ -42,7 +42,7 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
     res.render('index', {
         list_users: "View Users...",
-        counter: greet.getCounter(),
+        count: greet.getCounter(),
     }
 
     )
@@ -63,8 +63,6 @@ app.post('/', (req, res) => {
         setCounter: greet.getTotalCount()
     }
     )
-    console.log(greet.getTotalCount())
-
 }
 )
 
@@ -87,6 +85,7 @@ app.get('/user/:id', (req, res) => {
 app.get('/users', (req, res) => {
     res.render('users', {
         back: "< back",
+        user_names: greet.getUsers() ? 'List Users' : '',
         allUsers: greet.getUsers(),
     })
 })

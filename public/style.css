@@ -118,8 +118,6 @@ legend{
 
 }
 
-.language{
-}
 .buttons{
     display: flex;
     justify-content: space-around;
@@ -242,11 +240,17 @@ table, th, td {
 }
 
 .total{
-    margin: 10px 0;
+    margin: 20px 0;
     display: flex;
 }
 .total-name{
     color: rgb(43, 43, 43);
+
+}
+.total-count{
+    margin: 0 10px;
+    color: rgb(43, 43, 43);
+    font-weight: bold;
 }
 
 .user-title{
@@ -254,7 +258,7 @@ table, th, td {
 }
 .total-counter{
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 5px;
 }
 
 .back-container{
