@@ -8,7 +8,6 @@ import { db, getusers, getuser, insertuser, getuser_byname, getuser_by_id, updat
 
 const PORT = process.env.PORT || 8000
 const app = express()
-
 const greet = Greet()
 
 db.connect((err) => {
@@ -41,19 +40,18 @@ app.use(bodyParser.json())
 
 
 app.get('/', async (req, res) => {
-    let count = await db.query('SELECT COUNT(*) FROM users');
+    let users = await db.query('SELECT * FROM users');
     let date = await db.query('SELECT * FROM `users` ORDER BY users.date DESC')
     const fromDate = moment(date).fromNow()
     res.render('index', {
         list_users: "View Users...",
-        count: count[0].count,
+        count: users.length,
         date: fromDate
     })
-
-    console.log("COUNT: ", count)
 })
 
 app.post('/', async (req, res) => {
+    let users = await db.query('SELECT * FROM users');
     const { name, languages } = req.body
     let get_count = await db.query('SELECT COUNT(*) FROM users');
     greet.setName(name)
@@ -65,7 +63,7 @@ app.post('/', async (req, res) => {
         setUserLanguage: greet.setSelectedLanguage(),
         getLanguage: greet.getSelectedLanguage(),
         nameError: greet.getNameError(),
-        count: get_count[0].count,
+        count: users.length,
         list_users: `View ${greet.getName()} and more users...`,
     })
 
@@ -75,7 +73,7 @@ app.post('/', async (req, res) => {
         console.log("We inside")
         await updateuser(getbased_id)
     } else {
-         await insertuser(greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount())
+        await insertuser(greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount())
     }
 })
 
@@ -98,7 +96,7 @@ app.get('/user/:id', async (req, res) => {
             user,
             counter: user,
             back: "< back",
-            total_count: user.count > 1 ? user.name + ", you have been greeted " + user.count + ' times.' : user.name + ", you have been greeted" + user.count + 'time',
+            total_count: user.count > 1 ? user.name + ", you have been greeted " + user.count + ' times.' : user.name + ", you have been greeted " + user.count + ' time.',
         }
     )
 })

@@ -27,7 +27,7 @@ export const Greet = () => {
             userLanguage = ''
         }
     }
-    const getSelectedLanguage = () => userLanguage
+    const getSelectedLanguage = () => nameInput && language ? userLanguage : ''
     return {
         setName,
         setLanguage,
