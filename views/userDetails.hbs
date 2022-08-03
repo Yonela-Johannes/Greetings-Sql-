@@ -19,7 +19,7 @@
             </a>
         </div>
     </header>
-    <p class="user-title">Hey, you have been greeted {{total_counter}}</p>
+    <p class="user-title">Hey {{user.name}}.</p>
     <div class="row">
         <table>
             <tr>
@@ -29,25 +29,22 @@
                 <th>Greeting</th>
                 <th>Count</th>
             </tr>
-            {{#each userdetails}}
             <tr>
                 <td>
-                    <p class="name">{{name}}</p>
+                    <p class="name">{{user.name}}</p>
                 </td>
-                <td>{{time}}</td>
-                <td>{{language}}</td>
-                <td>{{greet}}</td>
-                <td>{{counter}}</td>
+                <td>{{user.date}}</td>
+                <td>{{user.language}}</td>
+                <td>{{user.greet}}</td>
+                <td>{{user.count}}</td>
             </tr>
-            {{/each}}
         </table>
         {{noDataError}}
         <div class="total">
             <p class="total-name">Total: </p>
-            <p class="total-count">{{total_counter}}</p>
+            <p class="total-count">{{total_count}}</p>
         </div>
     </div>
-
 </body>
 
 </html>
