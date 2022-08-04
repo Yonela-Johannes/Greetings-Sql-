@@ -35,13 +35,13 @@
                     <th>Delete</th>
                 <tr>
                     <tbody>
-                        {{#each search_user}}
+                        {{!-- {{#each search_user}} --}}
                         <td type="submit" class="username"><a href='/user/{{id}}'>
-                                <p class="name">{{this.name}}</p>
+                                <p class="name">{{search_user.name}}</p>
                             </a>
                         </td>
                         <td>{{search_user.date}}</td>
-                        <td>{{search_user.count}}</td>
+                        <td>{{searc_user.count}}</td>
                         <td type="submit" class="username"><a href="/delete/{{id}}">
                                 <p class="name">Delete</p>
                             </a>
@@ -49,7 +49,7 @@
                     </tbody>
             </form>
             </tr>
-            {{/each}}
+            {{!-- {{/each}} --}}
         </table>
     </div>
 

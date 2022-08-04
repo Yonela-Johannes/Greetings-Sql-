@@ -11,7 +11,7 @@ const app = express()
 const greet = Greet()
 dotenv.config()
 
-const PORT = process.env.PORT || 8000
+const port = process.env.PORT || 8000
 // connect to sql
 db.connect((err) => {
     if (err) {
@@ -81,6 +81,7 @@ app.post('/', async (req, res) => {
 // display all users
 app.get('/users', async (req, res) => {
     const all_users = await getusers()
+    console.log({ all_users })
     res.render('users', {
         all_users,
         name: 'All Users',
@@ -115,25 +116,17 @@ app.post('/clear', async (req, res) => {
     res.redirect('/')
 })
 
-// search user by name 
-// render search page
-app.get('/search', async (req, res) => {
-    res.render('users', {
-        all_users: 'You must search for a user.',
-        back: "back",
-    })
-})
 app.post('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    res.render('users', {
-        search_user,
+    res.render('search', {
+        search_user: search_user[0],
         name: search_name,
         back: "back",
     })
 })
 // displaying server in localhost
-app.listen(PORT, () => {
-    console.log('Your app is running on port: ', PORT)
+app.listen(port, () => {
+    console.log('Your app is running on port: ', port)
 })
