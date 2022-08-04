@@ -2,14 +2,16 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import handlebars from 'express-handlebars'
+import dotenv from 'dotenv'
 import moment from 'moment'
 import { Greet } from './app.js'
 import { db, getusers, getuser, insertuser, getuser_byname, getuser_by_id, updateuser, deleteuser, deleteusers } from './config/db.js'
 // server port number
-const PORT = process.env.PORT || 8000
 const app = express()
 const greet = Greet()
+dotenv.config()
 
+const PORT = process.env.PORT || 8000
 // connect to sql
 db.connect((err) => {
     if (err) {
