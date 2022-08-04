@@ -46,9 +46,8 @@ header h1{
     justify-content: center;
     background-color: antiquewhite;
     width: 100%;
-    height: 100vh;
-    /* padding: 20px; */
-    /* overflow: hidden; */
+    min-height: 100vh;
+    overflow: hidden;
 }
 .head{
     width: 500px;
@@ -167,8 +166,8 @@ button:hover{
     color: red;
     font-size: 13px;
     justify-self: center;
-    margin-top: 5px;
     margin-left: 60px;
+    height: 20px;
 }
 
 .dup-error {
@@ -213,13 +212,12 @@ button:hover{
     color: black;
 }
 .selection-error {
-    /* position: absolute; */
+    position: absolute;
     color: red;
     font-size: 13px;
     justify-self: center;
-    top: 0;
-    margin-top: 30px;
-    margin-left: 60px;
+    bottom: top;
+    height: 25px;
 }
 
 .name-list{
@@ -312,13 +310,37 @@ a.back:hover{
     color: rgb(67, 67, 67);
     border-color: rgb(73, 73, 73);
 }
+
+.greetme-field{
+    min-height: 80px;
+}
+.name:hover{
+    background-color: rgb(251, 251, 194);
+}
+h3{
+    color: rgb(31, 31, 31);
+    cursor: pointer;
+}
 @media screen and (max-width: 800px) {
+header{
+    top: 0;
+    right: 0;
+    left: 0;
+    color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(237, 255, 163);
+    width: 100%;
+    height: 60px;
+}
     .greeting-container{
         flex-direction: column;
     }
     .container{
         overflow: hidden;
-        height: 100%;
     }
     .name-list{
         margin-top: 15px;
@@ -329,6 +351,7 @@ a.back:hover{
         border: none;
     }
     .head{
+        padding-top: 120px;
         flex-direction: column;
     }
     fieldset{
@@ -353,4 +376,14 @@ a.back:hover{
         margin-bottom: 10px;
         color: gray;
     }
+    .search-form{
+        display: none
+    }
+    h3{
+        display: none
+    }
+    .table{
+        width: 250px;
+
+}
 }

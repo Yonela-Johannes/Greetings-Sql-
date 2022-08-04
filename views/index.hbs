@@ -11,7 +11,12 @@
 <body>
     <div class="container">
         <header>
-            <h1>Greet Counter</h1>
+            <a href="/">
+                <h1>Greet Counter</h1>
+            </a>
+            <a href="/users">
+                <h3>List Users</h3>
+            </a>
         </header>
         <div class="head">
             <img src="./greet.jpg" alt="" />
@@ -28,6 +33,7 @@
                             <label class="counter">{{count}}</label>
                         </div>
                         <label class="error">{{nameError}}</label><br />
+                        <label class="selection-error">{{languageError}}</label>
                         <label class="dup-error hide"></label><br />
                         <div class="bottom-container">
                             <span class="lang-title">Select language:</span><br />
@@ -47,7 +53,6 @@
                                     <label for="xhosa">isiXhosa</label><br />
                                 </div>
                             </div>
-                            <label class="selection-error">{{languageError}}</label>
                         </div>
                         <form action="/clear" method="post">
                             <div class="buttons">
@@ -65,7 +70,7 @@
                 <p class="totalCounter"></p>
             </a>
         </fieldset>
-        <fieldset>
+        <fieldset class="greetme-field">
             <label class="greet">{{language}} {{name}} </label>
         </fieldset>
     </div>
