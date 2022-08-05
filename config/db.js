@@ -61,5 +61,6 @@ module.exports = {
     insertuser,
     updateuser,
     deleteuser,
-    deleteusers
+    deleteusers,
+    db
 }

@@ -6,17 +6,11 @@ const dotenv = require('dotenv')
 const moment = require('moment')
 const pgp = require('pg-promise')({});
 const { Greet } = require('./app.js')
-const { getusers, getuser, insertuser, getuser_byname, getuser_by_name, updateuser, deleteuser, deleteusers } = require('./config/db.js')
+const { db, getusers, getuser, insertuser, getuser_byname, getuser_by_name, updateuser, deleteuser, deleteusers } = require('./config/db.js')
 // server port number
 const app = express()
 const greet = Greet()
 dotenv.config()
-
-const connection = 'postgres://postgres:juanesse123@localhost:5432/';
-
-const port = process.env.DATABASE_URL || connection
-// connect to sql
-const db = pgp(port)
 
 // allowing app to use xternal dependency and frameworks
 app.use((err, req, res, next) => {
@@ -122,6 +116,8 @@ app.post('/search', async (req, res) => {
         back: "back",
     })
 })
+
+const port = process.env.PORT || 3000
 // displaying server in localhost
 app.listen(port, () => {
     console.log('Your app is running on port: ', port)
