@@ -14,12 +14,11 @@ dotenv.config()
 
 const connection = 'postgres://postgres:juanesse123@localhost:5432/';
 
-const port = process.env.PORT || connection
+const port = process.env.DATABASE_URL || connection
 // connect to sql
-
 const db = pgp(port)
 
-// allowing app to use external dependency and frameworks
+// allowing app to use xternal dependency and frameworks
 app.use((err, req, res, next) => {
     console.error(err.stack)
     res.status(500).send('Something broke!')

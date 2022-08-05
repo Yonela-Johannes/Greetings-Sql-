@@ -3,6 +3,12 @@ const connection = 'postgres://postgres:juanesse123@localhost:5432/';
 const port = process.env.PORT || connection
 const db = pgp(port)
 
+const createTable = async () => {
+    const rows = await db.query('CREATE TABLE greetings ()')
+    return rows
+}
+
+
 // getting users
 const getusers = async () => {
     const rows = await db.query('SELECT * FROM greetings;')

@@ -1,0 +1,7 @@
+CREATE TABLE greeting (
+    ID SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    language VARCHAR(20) NOT NULL,
+    greet VARCHAR(20) NOT NULL,
+    count INT NOT NULL
+)
