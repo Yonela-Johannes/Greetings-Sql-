@@ -1,6 +1,6 @@
 const pgp = require('pg-promise')({});
 const connection = 'postgres://postgres:juanesse123@localhost:5432/';
-const port = process.env.PORT || connection
+const port = process.env.DATABASE_URL || connection
 const db = pgp(port)
 
 const createTable = async () => {
