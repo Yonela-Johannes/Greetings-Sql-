@@ -1,26 +1,23 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import handlebars from 'express-handlebars'
-import dotenv from 'dotenv'
-import moment from 'moment'
-import { Greet } from './app.js'
-import { db, getusers, getuser, insertuser, getuser_byname, getuser_by_id, updateuser, deleteuser, deleteusers } from './config/db.js'
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const handlebars = require('express-handlebars')
+const dotenv = require('dotenv')
+const moment = require('moment')
+const pgp = require('pg-promise')({});
+const { Greet } = require('./app.js')
+const { getusers, getuser, insertuser, getuser_byname, getuser_by_name, updateuser, deleteuser, deleteusers } = require('./config/db.js')
 // server port number
 const app = express()
 const greet = Greet()
 dotenv.config()
 
-const port = process.env.PORT || 8000
-// connect to sql
-db.connect((err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log('MySql Connected...')
-    }
-})
+const connection = 'postgres://postgres:juanesse123@localhost:5432/';
 
+const port = process.env.PORT || connection
+// connect to sql
+
+const db = pgp(port)
 
 // allowing app to use external dependency and frameworks
 app.use((err, req, res, next) => {
@@ -40,19 +37,21 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', async (req, res) => {
+    let users = await getusers()
+    const username = await getuser_byname('Yonela')
     res.render('index', {
         list_users: "View Users...",
+        count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
     })
 })
 
 // Making a post request to store users
 app.post('/', async (req, res) => {
-    // setting user details
-    let users = await db.query('SELECT * FROM users');
+    let users = await getusers()
     const { name, languages } = req.body
-    let get_count = await db.query('SELECT COUNT(*) FROM users');
     greet.setName(name)
     greet.setLanguage(languages)
+
     greet.setSelectedLanguage(),
         res.render('index', {
             // getting errorrs
@@ -62,15 +61,14 @@ app.post('/', async (req, res) => {
             getLanguage: greet.getSelectedLanguage(),
             language: greet.getLanguage(),
             name: greet.getName(),
-            count: users[0].count,
             list_users: `View ${greet.getName()} and more users...`,
+            count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
         })
 
     const getbased_name = name ? await getuser_byname(name) : name
-    const getbased_id = name ? await getuser_by_id(name) : name
     if (getbased_name === greet.getName()) {
         if (greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount()) {
-            await updateuser(getbased_id)
+            await updateuser(getbased_name)
         }
     } else {
         if (greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount()) {
@@ -81,7 +79,6 @@ app.post('/', async (req, res) => {
 // display all users
 app.get('/users', async (req, res) => {
     const all_users = await getusers()
-    console.log({ all_users })
     res.render('users', {
         all_users,
         name: 'All Users',

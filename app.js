@@ -4,7 +4,7 @@ let userLanguage = ""
 let count = 0
 
 // filtering name format 
-export const Greet = () => {
+const Greet = () => {
     const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
     const setLanguage = (lang) => language = lang
     const getNameError = () => !nameInput ? "Please enter your name!" : ''
@@ -43,4 +43,8 @@ export const Greet = () => {
         getSelectedLanguage,
     }
 
+}
+
+module.exports = {
+    Greet
 }

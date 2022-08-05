@@ -54,25 +54,26 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="/clear" method="post">
-                            <div class="buttons">
-                                <button type="submit" name="language" class="greet-me">Greet Me</button>
-                                <button type="submit" class="greet-me reset">Clear Names</button>
-                            </div>
-                        </form>
+                        <div class="buttons">
+
+                            <button type="submit" name="language" class="greet-me">Greet Me</button>
                     </form>
+                    <form action="/clear" method="post">
+                        <button type="submit" class="greet-me reset">Reset data</buttonx>
                 </div>
+                </form>
             </div>
-            <a href="/users">
-                <p class="view-users">
-                    {{list_users}}
-                </p>
-                <p class="totalCounter"></p>
-            </a>
-        </fieldset>
-        <fieldset class="greetme-field">
-            <label class="greet">{{language}} {{name}} </label>
-        </fieldset>
+    </div>
+    <a href="/users">
+        <p class="view-users">
+            {{list_users}}
+        </p>
+        <p class="totalCounter"></p>
+    </a>
+    </fieldset>
+    <fieldset class="greetme-field">
+        <label class="greet">{{language}} {{name}} </label>
+    </fieldset>
     </div>
     <script src="errors.js"></script>
 </body>
