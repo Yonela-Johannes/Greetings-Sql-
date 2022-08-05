@@ -261,6 +261,9 @@ table, th, td {
     color: rgb(43, 43, 43);
 
 }
+.home {
+    color: red;
+}
 .total-count{
     margin: 0 10px;
     color: rgb(43, 43, 43);

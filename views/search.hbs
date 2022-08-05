@@ -34,20 +34,18 @@
                     <th>Delete</th>
                 <tr>
                     <tbody>
-                        {{!-- {{#each search_user}} --}}
                         <td type="submit" class="username"><a href='/user/{{search_user.id}}'>
                                 <p class="name">{{search_user.name}}</p>
                             </a>
                         </td>
-                        <td>{{searc_user.count}}</td>
-                        <td type="submit" class="username"><a href="/delete/{{id}}">
+                        <td type="submit" class="username">
+                            <a href="/delete/{{id}}">
                                 <p class="name">Delete</p>
                             </a>
                         </td>
                     </tbody>
+                </tr>
             </form>
-            </tr>
-            {{!-- {{/each}} --}}
         </table>
     </div>
 

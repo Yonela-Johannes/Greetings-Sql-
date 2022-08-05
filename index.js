@@ -72,12 +72,19 @@ app.post('/', async (req, res) => {
 // display all users
 app.get('/users', async (req, res) => {
     const all_users = await getusers()
-    res.render('users', {
-        all_users,
-        name: 'All Users',
-        time: moment(all_users.date, true).fromNow(),
-        back: "back",
-    })
+
+    if (all_users.length > 0) {
+        res.render('users', {
+            all_users,
+            name: 'All Users',
+            back: "back",
+        })
+    } else {
+        res.render('error', {
+            name: "not found!",
+            back: "back",
+        })
+    }
 })
 
 // display user details
@@ -123,22 +130,39 @@ app.get('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    res.render('search', {
-        search_user: search_user[0],
-        name: search_name,
-        back: "back",
-    })
+    console.log(search_user)
+    if (search_user) {
+        res.render('search', {
+            search_user: search_user[0],
+            name: search_name,
+            back: "back",
+        })
+    } else {
+        res.render('error', {
+            name: search_name + "not found!",
+            back: "back",
+        })
+    }
 })
 
 app.post('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    res.render('search', {
-        search_user: search_user[0],
-        name: search_name,
-        back: "back",
-    })
+    console.log(search_user < 0)
+
+    if (search_user.length < 0) {
+        res.render('search', {
+            search_user: search_user[0],
+            name: search_name,
+            back: "back",
+        })
+    } else {
+        res.render('error', {
+            name: search_name ? search_name + "not found!" : 'You have not entered name!',
+            back: "back",
+        })
+    }
 })
 
 const port = process.env.PORT || 3000
