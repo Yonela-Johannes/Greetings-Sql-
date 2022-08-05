@@ -13,7 +13,7 @@
         <a href="/">
             <h1>Greet Counter</h1>
         </a>
-        <form action="/users" method="POST">
+        <form action="/search" method="POST">
             <div class="search-container">
                 <input class='search' type="text" name='search_name' value="" placeholder="search name" />
                 <button type="submit" class="name-label" for="name">Search</button>
@@ -28,7 +28,7 @@
     </header>
     <div class="row">
         <table class="table">
-            <form action="/search" method="POST">
+            <form action="/delete/:id" method="POST">
                 <tr>
                     <th>Name</th>
                     <th>Times Greeted</th>
@@ -36,11 +36,10 @@
                 <tr>
                     <tbody>
                         {{!-- {{#each search_user}} --}}
-                        <td type="submit" class="username"><a href='/user/{{id}}'>
+                        <td type="submit" class="username"><a href='/user/{{search_user.id}}'>
                                 <p class="name">{{search_user.name}}</p>
                             </a>
                         </td>
-                        <td>{{search_user.date}}</td>
                         <td>{{searc_user.count}}</td>
                         <td type="submit" class="username"><a href="/delete/{{id}}">
                                 <p class="name">Delete</p>

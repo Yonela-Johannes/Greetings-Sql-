@@ -94,6 +94,19 @@ app.get('/user/:id', async (req, res) => {
         }
     )
 })
+app.get('/user/:id', async (req, res) => {
+    const { id } = req.params
+    const user = await getuser(id)
+    res.render('userDetails',
+        {
+            user,
+            counter: user,
+            name: user.name,
+            back: "back",
+            total_count: user.count > 1 ? user.name + ", you have been greeted " + user.count + ' times.' : user.name + ", you have been greeted " + user.count + ' time.',
+        }
+    )
+})
 // drop/delete individual user
 app.get('/delete/:id', async (req, res) => {
     const { id } = req.params
@@ -104,6 +117,17 @@ app.get('/delete/:id', async (req, res) => {
 app.post('/clear', async (req, res) => {
     await deleteusers()
     res.redirect('/')
+})
+
+app.get('/search', async (req, res) => {
+    const { search_name } = req.body
+    const all_users = await getusers()
+    const search_user = all_users.filter(user => user.name === search_name)
+    res.render('search', {
+        search_user: search_user[0],
+        name: search_name,
+        back: "back",
+    })
 })
 
 app.post('/search', async (req, res) => {

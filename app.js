@@ -5,7 +5,7 @@ let count = 0
 
 // filtering name format 
 const Greet = () => {
-    const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase()
+    const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase().trim()
     const setLanguage = (lang) => language = lang
     const getNameError = () => !nameInput ? "Please enter your name!" : ''
     const getLanguageError = () => !language ? "Please select language!" : ''
