@@ -1,13 +1,14 @@
 const pgp = require('pg-promise')({});
-const connection = 'postgres://postgres:juanesse123@localhost:5432/';
-const port = process.env.DATABASE_URL || connection
-const db = pgp(port)
-
-const createTable = async () => {
-    const rows = await db.query('CREATE TABLE greetings ()')
-    return rows
+const local = 'postgres://postgres:juanesse123@localhost:5432/';
+const connectionString = process.env.DATABASE_URL || local
+const config = {
+    connectionString,
+    max: 20,
+    ssl: {
+        rejectUnauthorized: false
+    }
 }
-
+const db = pgp(config)
 
 // getting users
 const getusers = async () => {
