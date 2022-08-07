@@ -21,11 +21,6 @@ const getuser_byname = async (name) => {
     const rows = await db.query(`SELECT * FROM greeting WHERE name = $1;`, [name])
     return rows[0]?.['name']
 }
-// geting user by id
-const getuser_by_name = async (name) => {
-    const rows = await db.query(`SELECT * FROM greeting WHERE name = $1;`, [name])
-    return rows
-}
 
 // geting user by id and name
 const getuser = async (id) => {
@@ -57,7 +52,6 @@ const deleteusers = async (id) => {
 module.exports = {
     getusers,
     getuser_byname,
-    getuser_by_name,
     getuser,
     insertuser,
     updateuser,

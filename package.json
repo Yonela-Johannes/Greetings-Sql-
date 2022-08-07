@@ -5,9 +5,9 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js",
     "start": "node index.js",
-    "nodemon": "nodemon index.js"
+    "nodemon": "nodemon index.js",
+    "test": "mocha test/greetingsTest.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "dependencies": {
     "assert": "^2.0.0",
     "body-parser": "^1.20.0",
+    "chai": "^4.3.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^5.0.0-beta.1",

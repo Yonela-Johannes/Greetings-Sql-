@@ -1,46 +1,43 @@
 let nameInput = ''
 let language = ''
-let userLanguage = ""
-let count = 0
+let user_language = ""
+let count = 1
 
 // filtering name format 
 const Greet = () => {
-    const setName = (setname) => nameInput = setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase().trim()
+    const setName = (setname) => nameInput = typeof setname !== 'string' ? '' : setname.trim().replace(/[^a-z, ^A-Z]/g, '').toLocaleLowerCase().trim()
     const setLanguage = (lang) => language = lang
     const getNameError = () => !nameInput ? "Please enter your name!" : ''
     const getLanguageError = () => !language ? "Please select language!" : ''
 
     // retuning language
-    const setSelectedLanguage = () => {
-        if (language === 'Hello') {
-            userLanguage = 'English'
-        } else if (language === 'Hallo') {
-            userLanguage = 'Afrikaans'
-        } else if (language === 'Molo') {
-            userLanguage = 'isiXhosa'
-        } else if (language === 'Sawubona') {
-            userLanguage = 'isiZulu'
-        } else if (language === 'isiXhosa') {
-            userLanguage = 'Lumela'
-        } else {
-            userLanguage = ''
+    const setGreeting = (set_language) => {
+        if (set_language === 'English') {
+            user_language = 'Hello'
+        } else if (set_language === 'Afrikaans') {
+            user_language = 'Hallo'
+        } else if (set_language === 'isiXhosa') {
+            user_language = 'Molo'
         }
     }
-    // returning selected and input options
-    const getSelectedLanguage = () => nameInput && language ? userLanguage : ''
-    const getLanguage = () => nameInput && userLanguage ? language : ''
-    const getName = () => language && userLanguage ? nameInput.slice(0, 1).toUpperCase() + nameInput.slice(1).toLowerCase() : ''
-    const getCount = () => nameInput && language && userLanguage ? count + 1 : count
+    const getSelectedLanguage = () => nameInput && language ? user_language : ''
+    const getLanguage = () => nameInput && user_language ? language : ''
+    const getName = () => language && user_language ? nameInput.slice(0, 1).toUpperCase() + nameInput.slice(1).toLowerCase() : ''
+    const getGreeting = () => nameInput && language ? user_language : ''
+
+    const getCount = () => nameInput && language && user_language ? count++ : count = 0
     return {
         setName,
         setLanguage,
-        setSelectedLanguage,
+        setGreeting,
+
+        getGreeting,
         getLanguage,
         getNameError,
         getName,
         getLanguageError,
-        getCount,
         getSelectedLanguage,
+        getCount,
     }
 
 }

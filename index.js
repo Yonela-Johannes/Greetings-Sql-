@@ -3,10 +3,8 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const handlebars = require('express-handlebars')
 const dotenv = require('dotenv')
-const moment = require('moment')
-const pgp = require('pg-promise')({});
 const { Greet } = require('./app.js')
-const { db, getusers, getuser, insertuser, getuser_byname, getuser_by_name, updateuser, deleteuser, deleteusers } = require('./config/db.js')
+const { db, getusers, getuser, insertuser, getuser_byname, updateuser, deleteuser, deleteusers } = require('./config/db.js')
 // server port number
 const app = express()
 const greet = Greet()
@@ -14,7 +12,6 @@ dotenv.config()
 
 // allowing app to use xternal dependency and frameworks
 app.use((err, req, res, next) => {
-    console.error(err.stack)
     res.status(500).send('Something broke!')
 })
 
@@ -130,7 +127,6 @@ app.get('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    console.log(search_user)
     if (search_user) {
         res.render('search', {
             search_user: search_user[0],
@@ -139,7 +135,7 @@ app.get('/search', async (req, res) => {
         })
     } else {
         res.render('error', {
-            name: search_name + "not found!",
+            name: search_name + " not found!",
             back: "back",
         })
     }
@@ -149,7 +145,6 @@ app.post('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    console.log(search_user < 0)
 
     if (search_user.length < 0) {
         res.render('search', {
@@ -159,7 +154,7 @@ app.post('/search', async (req, res) => {
         })
     } else {
         res.render('error', {
-            name: search_name ? search_name + "not found!" : 'You have not entered name!',
+            name: search_name ? search_name + " not found!" : 'You have not entered name!',
             back: "back",
         })
     }
