@@ -34,8 +34,8 @@ const insertuser = async (name, language, greet, count) => {
     return getuser(id)
 }
 // update user
-const updateuser = async (name) => {
-    const result = await db.query('UPDATE greeting SET count = count + 1 WHERE name = $1;', [name])
+const updateuser = async (name, language, greet) => {
+    const result = await db.query('UPDATE greeting  SET language=$2, greet=$3, count= count + 1 WHERE name = $1;', [name, language, greet])
     return result
 
 }

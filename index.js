@@ -39,30 +39,30 @@ app.get('/', async (req, res) => {
 app.post('/', async (req, res) => {
     let users = await getusers()
     const { name, languages } = req.body
-    greet.setName(name)
-    greet.setLanguage(languages)
 
-    greet.setSelectedLanguage(),
-        res.render('index', {
-            // getting errorrs
-            nameError: greet.getNameError(),
-            languageError: greet.getLanguageError(),
-            // retrieving names
-            getLanguage: greet.getSelectedLanguage(),
-            language: greet.getLanguage(),
-            name: greet.getName(),
-            list_users: `View ${greet.getName()} and more users...`,
-            count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
-        })
+    greet.setName(name)
+    greet.setGreeting(languages)
+    res.render('index', {
+        // getting errorrs
+        nameError: greet.getNameError(),
+        languageError: greet.getLanguageError(),
+        // retrieving names
+        getLanguage: greet.getGreeting(),
+        greeting: greet.getGreeting(),
+        name: greet.getName(),
+        list_users: `View ${greet.getName()} and more users...`,
+        count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
+    })
 
     const getbased_name = name ? await getuser_byname(name) : name
+
     if (getbased_name === greet.getName()) {
-        if (greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount()) {
-            await updateuser(getbased_name)
+        if (greet.result()) {
+            await updateuser(getbased_name, greet.getLanguage(), greet.getGreeting(), greet.getCount())
         }
     } else {
-        if (greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount()) {
-            await insertuser(greet.getName(), greet.getLanguage(), greet.getSelectedLanguage(), greet.getCount())
+        if (greet.result()) {
+            await insertuser(greet.getName(), greet.getLanguage(), greet.getGreeting(), greet.getCount())
         }
     }
 })
