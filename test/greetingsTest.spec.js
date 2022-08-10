@@ -69,11 +69,11 @@ describe('Greetings function Test', () => {
             const count = greeting.getCount()
             const language = greeting.getLanguage()
             const result = greeting.result()
-            const [getbased_name] = await db.query(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
+            const [getbased_name] = await db.any(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
             if (result && getbased_name?.name !== name) {
-                await db.query(`INSERT INTO greetings_test (name, language, greet, count) VALUES ($1, $2, $3, $4);`, [name, language, greet, count])
+                await db.none(`INSERT INTO greetings_test (name, language, greet, count) VALUES ($1, $2, $3, $4);`, [name, language, greet, count])
             }
-            const [answer] = await db.query(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
+            const [answer] = await db.any(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
             const user = {
                 id: answer.id,
                 name: 'Yonela',
@@ -97,13 +97,13 @@ describe('Greetings function Test', () => {
             const language = greeting.getLanguage()
             const result = greeting.result()
 
-            const [getbased_name] = await db.query(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
+            const [getbased_name] = await db.any(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
             if (result && getbased_name?.name === name) {
                 await db.query('UPDATE greetings_test  SET language=$2, greet=$3, count= count + 1 WHERE name = $1;', [name, language, greet])
             } else if (result && getbased_name?.name !== name) {
-                await db.query(`INSERT INTO greetings_test (name, language, greet, count) VALUES ($1, $2, $3, $4);`, [name, language, greet, count])
+                await db.any(`INSERT INTO greetings_test (name, language, greet, count) VALUES ($1, $2, $3, $4);`, [name, language, greet, count])
             }
-            const [answer] = await db.query(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
+            const [answer] = await db.any(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
             const user = {
                 id: answer.id,
                 name: 'Okuhle',
@@ -130,7 +130,7 @@ describe('Greetings function Test', () => {
             if (result && getbased_name?.name !== name) {
                 await db.query(`INSERT INTO greetings_test (name, language, greet, count) VALUES ($1, $2, $3, $4);`, [name, language, greet, count])
             }
-            const [answer] = await db.query(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
+            const [answer] = await db.any(`SELECT * FROM greetings_test WHERE name = $1;`, [name])
             const id = answer.id
             await db.query('DELETE FROM greetings_test WHERE id = $1;', [id])
             assert.deepEqual([], await db.query("SELECT * FROM greetings_test;"))

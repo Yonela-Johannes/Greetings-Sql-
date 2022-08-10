@@ -24,7 +24,7 @@ const getuser_byname = async (name) => {
 
 // geting user by id and name
 const getuser = async (id) => {
-    const [rows] = await db.query(`SELECT * FROM greeting WHERE id = $1;`, [id])
+    const [rows] = await db.any(`SELECT * FROM greeting WHERE id = $1;`, [id])
     return rows
 }
 // insert user
