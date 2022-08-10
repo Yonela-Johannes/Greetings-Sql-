@@ -1,7 +1,7 @@
 let nameInput = ''
 let language = ''
 let user_language = ""
-let count = 1
+let count = 0
 
 // filtering name format 
 const Greet = () => {
@@ -24,7 +24,7 @@ const Greet = () => {
     const getLanguage = () => language
     const getName = () => language && user_language ? nameInput.slice(0, 1).toUpperCase() + nameInput.slice(1).toLowerCase() : ""
     const getGreeting = () => nameInput && language ? user_language : ''
-    const getCount = () => nameInput && language && user_language ? count = count : count = 0
+    const getCount = () => nameInput && language && user_language ? count + 1 : count
     const result = () => nameInput && language && user_language ? true : false
     return {
         setName,
