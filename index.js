@@ -26,22 +26,26 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 app.use(bodyParser.json())
 
-app.get('/', async (req, res) => {
-    let users = await getusers()
-    const username = await getuser_byname('Yonela')
-    res.render('index', {
-        list_users: "View Users...",
-        count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
-    })
-})
-
 // Making a post request to store users
 app.post('/', async (req, res) => {
-    let users = await getusers()
     const { name, languages } = req.body
-
     greet.setName(name)
     greet.setGreeting(languages)
+    const username = greet.getName()
+    const greeting = greet.getGreeting()
+    const count = greet.getCount()
+    const language = greet.getLanguage()
+    const result = greet.result()
+    const getbased_name = username ? await getuser_byname(username) : username
+
+    if (getbased_name === username && result) {
+        await updateuser(getbased_name, language, greeting, greet.count)
+    } else if (getbased_name !== username && result) {
+        await insertuser(username, language, greeting, count)
+    }
+
+    let users = await getusers()
+    const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
     res.render('index', {
         // getting errorrs
         nameError: greet.getNameError(),
@@ -51,25 +55,22 @@ app.post('/', async (req, res) => {
         greeting: greet.getGreeting(),
         name: greet.getName(),
         list_users: `View ${greet.getName()} and more users...`,
-        count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
+        count: counter
     })
-
-    const username = greet.getName()
-    const greeting = greet.getGreeting()
-    const count = greet.getCount()
-    const language = greet.getLanguage()
-    const result = greet.result()
-    const getbased_name = username ? await getuser_byname(username) : username
-    if (getbased_name === username && result) {
-        await updateuser(getbased_name, language, greeting, greet.count)
-    } else if (getbased_name !== username && result) {
-        await insertuser(username, language, greeting, count)
-    }
 })
+app.get('/', async (req, res) => {
+    let users = await getusers()
+    const username = await getuser_byname('Yonela')
+    const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
+    res.render('index', {
+        list_users: "View Users...",
+        count: counter
+    })
+})
+
 // display all users
 app.get('/users', async (req, res) => {
     const all_users = await getusers()
-
     if (all_users.length > 0) {
         res.render('users', {
             all_users,
