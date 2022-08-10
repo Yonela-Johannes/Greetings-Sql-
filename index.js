@@ -127,13 +127,13 @@ app.get('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    if (search_user) {
+    if (search_user.length >= 1 && search_name) {
         res.render('search', {
             search_user: search_user[0],
             name: search_name,
             back: "back",
         })
-    } else {
+    } else if (search_user.length < 1 || !search_name) {
         res.render('error', {
             name: search_name + " not found!",
             back: "back",
@@ -145,13 +145,13 @@ app.post('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-    if (all_users.length >= 1 && search_name) {
+    if (search_user.length >= 1 && search_name) {
         res.render('search', {
             search_user: search_user[0],
             name: search_name,
             back: "back",
         })
-    } else if (all_users.length === 0 || !search_name) {
+    } else if (search_user.length < 1 || !search_name) {
         res.render('error', {
             name: search_name ? search_name + " not found!" : 'You have not entered name!',
             back: "back",
