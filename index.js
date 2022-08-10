@@ -54,16 +54,16 @@ app.post('/', async (req, res) => {
         count: users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length,
     })
 
-    const getbased_name = name ? await getuser_byname(name) : name
-
-    if (getbased_name === greet.getName()) {
-        if (greet.result()) {
-            await updateuser(getbased_name, greet.getLanguage(), greet.getGreeting(), greet.getCount())
-        }
-    } else {
-        if (greet.result()) {
-            await insertuser(greet.getName(), greet.getLanguage(), greet.getGreeting(), greet.getCount())
-        }
+    const username = greet.getName()
+    const greeting = greet.getGreeting()
+    const count = greet.getCount()
+    const language = greet.getLanguage()
+    const result = greet.result()
+    const getbased_name = username ? await getuser_byname(username) : username
+    if (getbased_name === username && result) {
+        await updateuser(getbased_name, language, greeting, greet.count)
+    } else if (getbased_name !== username && result) {
+        await insertuser(username, language, greeting, count)
     }
 })
 // display all users
@@ -145,14 +145,13 @@ app.post('/search', async (req, res) => {
     const { search_name } = req.body
     const all_users = await getusers()
     const search_user = all_users.filter(user => user.name === search_name)
-
-    if (search_user.length < 0) {
+    if (all_users.length >= 1 && search_name) {
         res.render('search', {
             search_user: search_user[0],
             name: search_name,
             back: "back",
         })
-    } else {
+    } else if (all_users.length === 0 || !search_name) {
         res.render('error', {
             name: search_name ? search_name + " not found!" : 'You have not entered name!',
             back: "back",
