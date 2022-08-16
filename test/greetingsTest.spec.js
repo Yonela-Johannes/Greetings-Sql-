@@ -1,6 +1,7 @@
 const { Greet } = require('../app.js')
 const { assert } = require('chai');
 const { db } = require('../config/db.js')
+
 describe('Greetings function Test', () => {
     beforeEach(async () => {
         await db.query("DELETE FROM greetings_test")

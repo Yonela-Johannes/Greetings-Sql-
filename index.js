@@ -41,7 +41,7 @@ app.post('/', async (req, res) => {
         getLanguage: greet.getGreeting(),
         greeting: greet.getGreeting(),
         name: greet.getName(),
-        list_users: `View ${greet.getName()} and more users...`,
+        list_users: users.length !== 0 ? `View ${greet.getName()} and more users...` : "There are no stored users.",
         count: counter
     })
 })
@@ -98,8 +98,21 @@ app.get('/delete/:id', async (req, res) => {
 // delete all users
 app.post('/clear', async (req, res) => {
     await greet.removeUsers()
-    res.redirect('/')
+    res.render('index', {
+        greeting: 'All users cleared!',
+        list_users: `No stored users...`,
+        count: "No one have been greeted"
+    })
 })
+app.get('/clear', async (req, res) => {
+    await greet.removeUsers()
+    res.render('index', {
+        greeting: 'All users cleared!',
+        list_users: `No stored users...`,
+        count: "No one have been greeted"
+    })
+})
+
 
 app.get('/search', async (req, res) => {
     const { search_name } = req.body
