@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
@@ -36,11 +34,12 @@ jobs:
         
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+    - name: Install dependencies
+      run: npm install
     - name: create postgresql tables
       run: PGPASSWORD=juanesse123 psql -h localhost -U postgres -d greeting -a -f postgres://postgres:juanesse123@localhost:5432/
+    - name: run tests with postgresql
+      run:
+        npm run test
+      env:
+        DATABASE_URL: postgres://postgres:juanesse123@localhost:5432/
