@@ -28,7 +28,7 @@
     </header>
     <div class="row">
         <table class="table">
-            <form action="/user/{{this.id}}" method="POST">
+            <form action="/users/{{this.id}}" method="POST">
 
                 <tr>
                     <th>Name</th>
@@ -37,12 +37,12 @@
                 <tr>
                     <tbody>
                         {{#each all_users}}
-                        <td type="submit" class="username"><a href='/user/{{id}}'>
+                        <td type="submit" class="username"><a href='/users/{{id}}'>
                                 <p class="name">{{name}}</p>
                             </a>
                         </td>
                         <td>{{count}}</td>
-                        <td type="submit" class="username"><a href="/delete/{{id}}">
+                        <td type="submit" class="username"><a href="/users/delete/{{id}}">
                                 <p class="name">Delete</p>
                             </a>
                         </td>
