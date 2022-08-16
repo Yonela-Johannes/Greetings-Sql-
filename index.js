@@ -30,9 +30,9 @@ app.post('/', async (req, res) => {
     const { name, languages } = req.body
     greet.setName(name)
     greet.setGreeting(languages)
+    await greet.setNames()
     let users = await greet.getNames()
     const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
-    await greet.setNames()
     res.render('index', {
         // getting errorrs
         nameError: greet.getNameError(),
@@ -45,12 +45,15 @@ app.post('/', async (req, res) => {
         count: counter
     })
 })
+
 app.get('/', async (req, res) => {
     let users = await greet.getNames()
     const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
     res.render('index', {
-        list_users: "View Users...",
+        list_users: greet.getName() ? `View ${greet.getName()} and more users...` : "View Users...",
         count: counter
+
+
     })
 })
 
