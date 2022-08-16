@@ -4,7 +4,6 @@ const cors = require('cors')
 const handlebars = require('express-handlebars')
 const dotenv = require('dotenv')
 const { Greet } = require('./app.js')
-const { db, getusers, getuser, insertuser, getuser_byname, updateuser, deleteuser, deleteusers } = require('./config/db.js')
 // server port number
 const app = express()
 const greet = Greet()
@@ -31,21 +30,9 @@ app.post('/', async (req, res) => {
     const { name, languages } = req.body
     greet.setName(name)
     greet.setGreeting(languages)
-    const username = greet.getName()
-    const greeting = greet.getGreeting()
-    const count = greet.getCount()
-    const language = greet.getLanguage()
-    const result = greet.result()
-    const getbased_name = username ? await getuser_byname(username) : username
-
-    if (getbased_name === username && result) {
-        await updateuser(getbased_name, language, greeting, greet.count)
-    } else if (getbased_name !== username && result) {
-        await insertuser(username, language, greeting, count)
-    }
-
-    let users = await getusers()
+    let users = await greet.getNames()
     const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
+    await greet.setNames()
     res.render('index', {
         // getting errorrs
         nameError: greet.getNameError(),
@@ -59,8 +46,7 @@ app.post('/', async (req, res) => {
     })
 })
 app.get('/', async (req, res) => {
-    let users = await getusers()
-    const username = await getuser_byname('Yonela')
+    let users = await greet.getNames()
     const counter = users.length === 0 ? "No one have been greeted" : 'Total people greeted: ' + users.length
     res.render('index', {
         list_users: "View Users...",
@@ -70,7 +56,7 @@ app.get('/', async (req, res) => {
 
 // display all users
 app.get('/users', async (req, res) => {
-    const all_users = await getusers()
+    const all_users = await greet.getNames()
     if (all_users.length > 0) {
         res.render('users', {
             all_users,
@@ -88,7 +74,7 @@ app.get('/users', async (req, res) => {
 // display user details
 app.get('/user/:id', async (req, res) => {
     const { id } = req.params
-    const user = await getuser(id)
+    const user = await greet.getNameById(id)
     res.render('userDetails',
         {
             user,
@@ -99,34 +85,22 @@ app.get('/user/:id', async (req, res) => {
         }
     )
 })
-app.get('/user/:id', async (req, res) => {
-    const { id } = req.params
-    const user = await getuser(id)
-    res.render('userDetails',
-        {
-            user,
-            counter: user,
-            name: user.name,
-            back: "back",
-            total_count: user.count > 1 ? user.name + ", you have been greeted " + user.count + ' times.' : user.name + ", you have been greeted " + user.count + ' time.',
-        }
-    )
-})
+
 // drop/delete individual user
 app.get('/delete/:id', async (req, res) => {
     const { id } = req.params
-    const user = await deleteuser(id)
+    const user = await greet.removeUser(id)
     res.redirect('/users')
 })
-// delet all users
+// delete all users
 app.post('/clear', async (req, res) => {
-    await deleteusers()
+    await greet.removeUsers()
     res.redirect('/')
 })
 
 app.get('/search', async (req, res) => {
     const { search_name } = req.body
-    const all_users = await getusers()
+    const all_users = await greet.getNames()
     const search_user = all_users.filter(user => user.name === search_name)
     if (search_user.length >= 1 && search_name) {
         res.render('search', {
@@ -144,7 +118,7 @@ app.get('/search', async (req, res) => {
 
 app.post('/search', async (req, res) => {
     const { search_name } = req.body
-    const all_users = await getusers()
+    const all_users = await greet.getNames()
     const search_user = all_users.filter(user => user.name === search_name)
     if (search_user.length >= 1 && search_name) {
         res.render('search', {
