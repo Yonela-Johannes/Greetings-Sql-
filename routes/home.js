@@ -82,7 +82,7 @@ const GreetRoute = (greetingsDb, greet) => {
     const searchPost = async (req, res) => {
         const { search_name } = req.body
         const all_users = await greetingsDb.getUsers()
-        const search_user = all_users.filter(user => user.name === search_name)
+        const search_user = all_users.filter(user => user.name.toLowerCase() === search_name.toLowerCase())
         if (search_user.length >= 1 && search_name) {
             res.render('search', {
                 search_user: search_user[0],

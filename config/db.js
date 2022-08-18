@@ -1,11 +1,11 @@
 // getting users
 const GreetingsDb = (db) => {
     const getUsers = async () => {
-        const rows = await db.manyOrNone('SELECT * FROM greeting;')
+        const rows = await db.any('SELECT * FROM greeting;')
         return rows
     }
     const countUsers = async () => {
-        const rows = await db.many('SELECT name FROM greeting;')
+        const rows = await db.any('SELECT name FROM greeting;')
         return rows.length
     }
     // getting user by user name
