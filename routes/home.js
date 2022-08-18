@@ -21,7 +21,7 @@ const GreetRoute = (greetingsDb, greet) => {
     const homeGet = async (req, res) => {
         const counter = await greetingsDb.countUsers()
         res.render('index', {
-            list_users: greet.getName() ? `View ${greet.getName()} and more users...` : "View Users...",
+            list_users: counter !== 0 ? `View ${greet.getName()} and more users...` : "There are no stored users.",
             count: counter
         })
     }
