@@ -8,6 +8,7 @@ const config = {
     connectionString,
     max: 20
 }
+
 const db = pgp(config)
 const { GreetingsDb } = require('../config/testdb')
 const greetingsDb = GreetingsDb(db)
